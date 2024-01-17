@@ -1,0 +1,84 @@
+﻿<Page x:Class="DungeonCrawler.CharacterCreation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DungeonCrawler"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CharacterCreation">
+
+    <Canvas Background="#FFE1D2D2">
+        <StackPanel Width="200" Margin="70,37,530,301" Height="130">
+            <TextBlock><Run Text="Choose class:"/></TextBlock>
+            <RadioButton Name="RBPaladin" Content="Paladin" IsChecked="True"/>
+            <RadioButton Name="RBWarrior" Content="Warrior"/>
+            <RadioButton Name="RBRogue" Content="Rogue"/>
+            <RadioButton Name="RBRanger" Content="Ranger"/>
+            <RadioButton Name="RBMage" Content="Mage"/>
+            <RadioButton Name="RBPriest" Content="Priest"/>
+
+
+        </StackPanel>
+        <StackPanel Height="auto" Width="auto" Canvas.Left="241" Canvas.Top="37" Orientation="Horizontal">
+            <TextBlock>Name:</TextBlock>
+            <TextBox Name="CharName" Width="100" Margin="10,0,0,0"></TextBox>
+        </StackPanel>
+        <Grid Canvas.Left="241" Canvas.Top="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0
+                       " Grid.Column="0" Margin="0,0,10,0">Strength</TextBlock>
+            <Button 
+                Name="StrPlus" 
+                Content="+"
+                Click="StrPlus_Click"
+                Grid.Column="1" Grid.Row="0" Margin="0,0,10,0" Width="20" Height="20">
+            </Button>
+            <TextBlock 
+                Name="StrValue" 
+                Grid.Column="2" 
+                Grid.Row="0" 
+                Margin="0,0,10,0">12</TextBlock>
+            <Button 
+                Name="StrMinus" 
+                Content="-"
+                Click="StrMinus_Click"
+                Grid.Column="3" Grid.Row="0" Margin="0,0,10,0" Height="20" Width="20">
+            </Button>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">Agility</TextBlock>
+            <Button 
+                Name="AgiPlus" 
+                Content="+"
+                Click="AgiPlus_Click"
+                Grid.Column="1" Grid.Row="1" Margin="0,0,10,0" Width="20" Height="20">
+            </Button>
+            <TextBlock Name="AgiValue" Grid.Column="2" Grid.Row="1" Margin="0,0,10,0">12</TextBlock>
+            <Button 
+                Name="AgiMinus" 
+                Content="-"
+                Click="AgiMinus_Click"
+                Grid.Column="3" Grid.Row="1" Margin="0,0,10,0" Height="20" Width="20">
+            </Button>
+        </Grid>
+        <Button Name="CreateChar" 
+                Content="Create" 
+                Canvas.Left="335" 
+                Canvas.Top="165" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Click="CreateChar_Click" Width="50" Height="30"></Button>
+    </Canvas>
+</Page>

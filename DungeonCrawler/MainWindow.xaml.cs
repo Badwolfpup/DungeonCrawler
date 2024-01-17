@@ -23,7 +23,17 @@ namespace DungeonCrawler
         public MainWindow()
         {
             InitializeComponent();
-            
+            CharCreate();
+
+        }
+
+        private void CharCreate()
+        {
+            var frame = new Frame();
+            frame.HorizontalAlignment = HorizontalAlignment.Stretch;
+            frame.VerticalAlignment = VerticalAlignment.Stretch;
+            AddChild(frame);
+            frame.Navigate(new CharacterCreation());
         }
     }
 }

@@ -142,5 +142,7 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top"
                 Click="CreateChar_Click" Width="50" Height="30" RenderTransformOrigin="0,2.528"></Button>
+        <Button Name="loadFile" Click="loadFile_Click" Width="40" Height="20" Canvas.Left="318" Canvas.Top="243" Content="Load"></Button>
+        <TextBlock Name="partylist" Text="" Canvas.Left="400" Canvas.Top="60"></TextBlock>
     </Canvas>
 </Page>

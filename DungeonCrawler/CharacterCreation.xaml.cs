@@ -1,5 +1,7 @@
 ﻿using DungeonCrawler.Classes;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -222,6 +224,7 @@ namespace DungeonCrawler
                         var p = new Priest(str, agi, inte, spi, sta, CharName.Text);
                         characterList.Add(p);
                     }
+                    saveFile();
                 }
                 else MessageBox.Show("You cannot add another character. Maximum party size is 4");
             }
@@ -229,5 +232,174 @@ namespace DungeonCrawler
             else MessageBox.Show("The character name must be between 5-14 characters long");
         }
 
+        private void saveFile()
+        {
+            List<string> list = new List<string>();
+            foreach(Character c in characterList)
+            {
+                string prop = "";
+                if (c is Paladin)
+                {
+                    Paladin p = (Paladin)c;
+                    prop = p.ClassName + "|";                   
+                    prop += p.Strength.ToString() + "|";
+                    prop += p.Agility.ToString() + "|";
+                    prop += p.Intellect.ToString() + "|";
+                    prop += p.Spirit.ToString() + "|";
+                    prop += p.Stamina.ToString() + "|";
+                    prop += p.characterName + "|";
+                }
+                else if (c is Warrior)
+                {
+                    Warrior p = (Warrior)c;
+                    prop = p.ClassName + "|";
+                    prop += p.Strength.ToString() + "|";
+                    prop += p.Agility.ToString() + "|";
+                    prop += p.Intellect.ToString() + "|";
+                    prop += p.Spirit.ToString() + "|";
+                    prop += p.Stamina.ToString() + "|";
+                    prop += p.characterName + "|";
+                }
+                else if (c is Rogue)
+                {
+                    Rogue p = (Rogue)c;
+                    prop = p.ClassName + "|";
+                    prop += p.Strength.ToString() + "|";
+                    prop += p.Agility.ToString() + "|";
+                    prop += p.Intellect.ToString() + "|";
+                    prop += p.Spirit.ToString() + "|";
+                    prop += p.Stamina.ToString() + "|";
+                    prop += p.characterName + "|";
+                }
+                else if (c is Ranger)
+                {
+                    Ranger p = (Ranger)c;
+                    prop = p.ClassName + "|";
+                    prop += p.Strength.ToString() + "|";
+                    prop += p.Agility.ToString() + "|";
+                    prop += p.Intellect.ToString() + "|";
+                    prop += p.Spirit.ToString() + "|";
+                    prop += p.Stamina.ToString() + "|";
+                    prop += p.characterName + "|";
+                }
+                else if (c is Mage)
+                {
+                    Mage p = (Mage)c;
+                    prop = p.ClassName + "|";
+                    prop += p.Strength.ToString() + "|";
+                    prop += p.Agility.ToString() + "|";
+                    prop += p.Intellect.ToString() + "|";
+                    prop += p.Spirit.ToString() + "|";
+                    prop += p.Stamina.ToString() + "|";
+                    prop += p.characterName + "|";
+                }
+                else if (c is Priest)
+                {
+                    Priest p = (Priest)c;
+                    prop = p.ClassName + "|";
+                    prop += p.Strength.ToString() + "|";
+                    prop += p.Agility.ToString() + "|";
+                    prop += p.Intellect.ToString() + "|";
+                    prop += p.Spirit.ToString() + "|";
+                    prop += p.Stamina.ToString() + "|";
+                    prop += p.characterName + "|";
+                }
+                list.Add(prop);
+            }
+            File.WriteAllLines(@"C:\Bankapp\klasser.txt", list);
+        }
+
+        private void loadFile_Click(object sender, RoutedEventArgs e)
+        {
+            string[] list = File.ReadAllLines(@"C:\Bankapp\klasser.txt");
+            List<string> prop = new List<string>();
+            characterList.Clear();
+            foreach (string s in list)
+            {
+                string x = "";
+                foreach (char c in s)
+                {
+                    if (c != '|') x += c.ToString();
+                    else
+                    {
+                        prop.Add(x.ToString());
+                        x = "";
+                    }
+                }
+                if (prop[0] == "Paladin")
+                {
+                    int str = int.Parse(prop[1]);
+                    int agi = int.Parse(prop[2]);
+                    int inte = int.Parse(prop[3]);
+                    int spi = int.Parse(prop[4]);
+                    int sta = int.Parse(prop[5]);
+                    Paladin p = new Paladin(str, agi, inte, spi, sta, prop[6]);
+                    characterList.Add(p);
+                    partylist.Text += $"Name: {prop[6]} Class: {prop[0]} \n" +
+                                      $"Str: {prop[1]} Agi: {prop[2]} Int: {prop[3]} Spi: {prop[4]} Sta: {prop[5]} \n";
+                }
+                else if (prop[0] == "Warrior") 
+                {
+                    int str = int.Parse(prop[1]);
+                    int agi = int.Parse(prop[2]);
+                    int inte = int.Parse(prop[3]);
+                    int spi = int.Parse(prop[4]);
+                    int sta = int.Parse(prop[5]);
+                    Warrior p = new Warrior(str, agi, inte, spi, sta, prop[6]);
+                    characterList.Add(p);
+                    partylist.Text += $"Name: {prop[6]} Class: {prop[0]} \n" +
+                           $"Str: {prop[1]} Agi: {prop[2]} Int: {prop[3]} Spi: {prop[4]} Sta: {prop[5]} \n";
+                }
+                else if (prop[0] == "Rogue")
+                {
+                    int str = int.Parse(prop[1]);
+                    int agi = int.Parse(prop[2]);
+                    int inte = int.Parse(prop[3]);
+                    int spi = int.Parse(prop[4]);
+                    int sta = int.Parse(prop[5]);
+                    Rogue p = new Rogue(str, agi, inte, spi, sta, prop[6]);
+                    characterList.Add(p);
+                    partylist.Text += $"Name: {prop[6]} Class: {prop[0]} \n" +
+                           $"Str: {prop[1]} Agi: {prop[2]} Int: {prop[3]} Spi: {prop[4]} Sta: {prop[5]} \n";
+                }
+                else if (prop[0] == "Ranger")
+                {
+                    int str = int.Parse(prop[1]);
+                    int agi = int.Parse(prop[2]);
+                    int inte = int.Parse(prop[3]);
+                    int spi = int.Parse(prop[4]);
+                    int sta = int.Parse(prop[5]);
+                    Ranger p = new Ranger(str, agi, inte, spi, sta, prop[6]);
+                    characterList.Add(p);
+                    partylist.Text += $"Name: {prop[6]} Class: {prop[0]} \n" +
+                           $"Str: {prop[1]} Agi: {prop[2]} Int: {prop[3]} Spi: {prop[4]} Sta: {prop[5]} \n";
+                }
+                else if (prop[0] == "Mage")
+                {
+                    int str = int.Parse(prop[1]);
+                    int agi = int.Parse(prop[2]);
+                    int inte = int.Parse(prop[3]);
+                    int spi = int.Parse(prop[4]);
+                    int sta = int.Parse(prop[5]);
+                    Mage p = new Mage(str, agi, inte, spi, sta, prop[6]);
+                    characterList.Add(p);
+                    partylist.Text += $"Name: {prop[6]} Class: {prop[0]} \n" +
+                           $"Str: {prop[1]} Agi: {prop[2]} Int: {prop[3]} Spi: {prop[4]} Sta: {prop[5]} \n";
+                }
+                else if (prop[0] == "Priest")
+                {
+                    int str = int.Parse(prop[1]);
+                    int agi = int.Parse(prop[2]);
+                    int inte = int.Parse(prop[3]);
+                    int spi = int.Parse(prop[4]);
+                    int sta = int.Parse(prop[5]);
+                    Priest p = new Priest(str, agi, inte, spi, sta, prop[6]);
+                    characterList.Add(p);
+                    partylist.Text += $"Name: {prop[6]} Class: {prop[0]} \n" +
+                           $"Str: {prop[1]} Agi: {prop[2]} Int: {prop[3]} Spi: {prop[4]} Sta: {prop[5]} \n";
+                }
+                prop.Clear();
+            }
+        }
     }
 }

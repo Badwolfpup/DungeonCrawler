@@ -1,0 +1,1 @@
+ClassName,Ranger|Strength,12|Agility,12|Intellect,12|Spirit,12|Stamina,12|HP,0|MP,0|XP,0|Armor,0|MagicDefense,0|CharacterName,Sven|

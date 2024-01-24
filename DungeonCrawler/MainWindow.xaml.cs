@@ -8,6 +8,7 @@ namespace DungeonCrawler
     /// </summary>
     public partial class MainWindow : Window
     {
+        Frame frame;
         public MainWindow()
         {
             InitializeComponent();
@@ -17,11 +18,16 @@ namespace DungeonCrawler
 
         private void CharCreate()
         {
-            var frame = new Frame();
+            frame = new Frame();
             frame.HorizontalAlignment = HorizontalAlignment.Stretch;
             frame.VerticalAlignment = VerticalAlignment.Stretch;
             AddChild(frame);
-            frame.Navigate(new CharacterCreation());
+            frame.Navigate(new CharacterCreation(this));
+        }
+
+        public void closeCharCreatePage()
+        {
+            Content = null;
         }
     }
 }

@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 
 namespace DungeonCrawler
 {
     static class SaveParty
     {
         private static readonly string filePath = @"C:\Users\h09825\source\repos\DungeonCrawler\party.json";
-        public static void SaveToFile(List<Character> party) 
+        public static void SaveToFile(ObservableCollection<Character> party) 
         {
             JsonSerializerSettings settings = new JsonSerializerSettings()
             {

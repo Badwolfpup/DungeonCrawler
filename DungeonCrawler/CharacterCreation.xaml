@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DungeonCrawler"
+      xmlns:System="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CharacterCreation">
@@ -11,12 +12,12 @@
     <Canvas Background="#FFE1D2D2">
         <StackPanel Width="auto" Height="auto" Canvas.Left="60" Canvas.Top="37">
             <TextBlock><Run Text="Choose class:"/></TextBlock>
-            <RadioButton Name="RBPaladin" Content="Paladin" IsChecked="True"/>
-            <RadioButton Name="RBWarrior" Content="Warrior"/>
-            <RadioButton Name="RBRogue" Content="Rogue"/>
-            <RadioButton Name="RBRanger" Content="Ranger"/>
-            <RadioButton Name="RBMage" Content="Mage"/>
-            <RadioButton Name="RBPriest" Content="Priest"/>
+            <RadioButton Content="Paladin" IsChecked="True" Checked="RadioButton_Checked"/>
+            <RadioButton Content="Warrior" Checked="RadioButton_Checked"/>
+            <RadioButton Content="Rogue" Checked="RadioButton_Checked"/>
+            <RadioButton Content="Ranger" Checked="RadioButton_Checked"/>
+            <RadioButton Content="Mage" Checked="RadioButton_Checked"/>
+            <RadioButton Content="Priest" Checked="RadioButton_Checked"/>
         </StackPanel>
         <StackPanel Height="auto" Width="auto" Canvas.Left="241" Canvas.Top="37" Orientation="Horizontal">
             <TextBlock>Name:</TextBlock>
@@ -43,35 +44,61 @@
             <Button 
             Name="StrPlus" 
             Content="+"
-            Click="StrPlus_Click"
-            Grid.Column="1" Grid.Row="0" Margin="0,0,10,0" Width="20" Height="20">
+            Grid.Column="1" Grid.Row="0" Margin="0,0,10,0" Width="20" Height="20"
+            Command="{Binding ChangeStats}">
+                <Button.CommandParameter>
+                    <x:Array Type="{x:Type System:String}">
+                        <System:String>Strength</System:String>
+                        <System:String>true</System:String>
+                    </x:Array>
+                </Button.CommandParameter>
             </Button>
-            <TextBlock 
-            Name="StrValue" 
-            Grid.Column="2" 
-            Grid.Row="0" 
-            Margin="0,0,10,0">12</TextBlock>
+
+            <TextBlock Name="StrValue" Grid.Column="2" Grid.Row="0" Margin="0,0,10,0" Text="{Binding Strength}"></TextBlock>
+            
             <Button 
             Name="StrMinus" 
             Content="-"
-            Click="StrMinus_Click"
-            Grid.Column="3" Grid.Row="0" Margin="0,0,10,0" Height="20" Width="20">
+         
+            Grid.Column="3" Grid.Row="0" Margin="0,0,10,0" Height="20" Width="20"
+            Command="{Binding ChangeStats}">
+                <Button.CommandParameter>
+                    <x:Array Type="{x:Type System:String}">
+                        <System:String>Strength</System:String>
+                        <System:String>false</System:String>
+                    </x:Array>
+                </Button.CommandParameter>
             </Button>
+            
 
             <!--Agility-->
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">Agility</TextBlock>
             <Button 
             Name="AgiPlus" 
             Content="+"
-            Click="AgiPlus_Click"
+            Command="{Binding ChangeStats}"
             Grid.Column="1" Grid.Row="1" Margin="0,0,10,0" Width="20" Height="20">
+                <Button.CommandParameter>
+                    <x:Array Type="{x:Type System:String}">
+                        <System:String>Agility</System:String>
+                        <System:String>true</System:String>
+                    </x:Array>
+                </Button.CommandParameter>
             </Button>
-            <TextBlock Name="AgiValue" Grid.Column="2" Grid.Row="1" Margin="0,0,10,0">12</TextBlock>
+
+            <TextBlock Name="AgiValue" Grid.Column="2" Grid.Row="1" Margin="0,0,10,0" Text="{Binding Agility}"></TextBlock>
+            
             <Button 
             Name="AgiMinus" 
             Content="-"
-            Click="AgiMinus_Click"
+            Command="{Binding ChangeStats}"
             Grid.Column="3" Grid.Row="1" Margin="0,0,10,0" Height="20" Width="20">
+                <Button.CommandParameter>
+                    <x:Array Type="{x:Type System:String}">
+                        <System:String>Agility</System:String>
+                        <System:String>false</System:String>
+                    </x:Array>
+                </Button.CommandParameter>
             </Button>
 
             <!--Intellect-->
@@ -79,15 +106,29 @@
             <Button 
             Name="IntPlus" 
             Content="+"
-            Click="IntPlus_Click"
+            Command="{Binding ChangeStats}"
             Grid.Column="1" Grid.Row="2" Margin="0,0,10,0" Width="20" Height="20">
+                <Button.CommandParameter>
+                    <x:Array Type="{x:Type System:String}">
+                        <System:String>Intellect</System:String>
+                        <System:String>true</System:String>
+                    </x:Array>
+                </Button.CommandParameter>
             </Button>
-            <TextBlock Name="IntValue" Grid.Column="2" Grid.Row="2" Margin="0,0,10,0">12</TextBlock>
+
+            <TextBlock Name="IntValue" Grid.Column="2" Grid.Row="2" Margin="0,0,10,0" Text="{Binding Intellect}"></TextBlock>
+            
             <Button 
             Name="IntMinus" 
             Content="-"
-            Click="IntMinus_Click"
+            Command="{Binding ChangeStats}"
             Grid.Column="3" Grid.Row="2" Margin="0,0,10,0" Height="20" Width="20">
+                <Button.CommandParameter>
+                    <x:Array Type="{x:Type System:String}">
+                        <System:String>Intellect</System:String>
+                        <System:String>false</System:String>
+                    </x:Array>
+                </Button.CommandParameter>
             </Button>
 
             <!--Spirit-->
@@ -95,15 +136,29 @@
             <Button 
             Name="SpiPlus" 
             Content="+"
-            Click="SpiPlus_Click"
+            Command="{Binding ChangeStats}"
             Grid.Column="1" Grid.Row="3" Margin="0,0,10,0" Width="20" Height="20">
+                <Button.CommandParameter>
+                    <x:Array Type="{x:Type System:String}">
+                        <System:String>Spirit</System:String>
+                        <System:String>true</System:String>
+                    </x:Array>
+                </Button.CommandParameter>
             </Button>
-            <TextBlock Name="SpiValue" Grid.Column="2" Grid.Row="3" Margin="0,0,10,0">12</TextBlock>
+
+            <TextBlock Name="SpiValue" Grid.Column="2" Grid.Row="3" Margin="0,0,10,0" Text="{Binding Spirit}"></TextBlock>
+            
             <Button 
             Name="SpiMinus" 
             Content="-"
-            Click="SpiMinus_Click"
+            Command="{Binding ChangeStats}"
             Grid.Column="3" Grid.Row="3" Margin="0,0,10,0" Height="20" Width="20">
+                <Button.CommandParameter>
+                    <x:Array Type="{x:Type System:String}">
+                        <System:String>Spirit</System:String>
+                        <System:String>false</System:String>
+                    </x:Array>
+                </Button.CommandParameter>
             </Button>
 
             <!--Stamina-->
@@ -111,21 +166,35 @@
             <Button 
             Name="StaPlus" 
             Content="+"
-            Click="StaPlus_Click"
+            Command="{Binding ChangeStats}"
             Grid.Column="1" Grid.Row="4" Margin="0,0,10,0" Width="20" Height="20">
+                <Button.CommandParameter>
+                    <x:Array Type="{x:Type System:String}">
+                        <System:String>Stamina</System:String>
+                        <System:String>true</System:String>
+                    </x:Array>
+                </Button.CommandParameter>
             </Button>
-            <TextBlock Name="StaValue" Grid.Column="2" Grid.Row="4" Margin="0,0,10,0">12</TextBlock>
+
+            <TextBlock Name="StaValue" Grid.Column="2" Grid.Row="4" Margin="0,0,10,0" Text="{Binding Stamina}"></TextBlock>
+            
             <Button 
             Name="StaMinus" 
             Content="-"
-            Click="StaMinus_Click"
+            Command="{Binding ChangeStats}"
             Grid.Column="3" Grid.Row="4" Margin="0,0,10,0" Height="20" Width="20">
+                <Button.CommandParameter>
+                    <x:Array Type="{x:Type System:String}">
+                        <System:String>Stamina</System:String>
+                        <System:String>false</System:String>
+                    </x:Array>
+                </Button.CommandParameter>
             </Button>
 
         </Grid>
         <StackPanel Orientation="Horizontal" Canvas.Left="241" Canvas.Top="165">
             <TextBlock ><Run Text="Unassigned points:"/></TextBlock>
-            <TextBlock Name="unassignedText" Margin="10,0,0,0"></TextBlock>
+            <TextBlock Name="unassignedText" Margin="10,0,0,0" Text="{Binding UnassignedPoints}"></TextBlock>
         </StackPanel>
         <Button Name="CreateChar" 
             Content="Add character" 
@@ -139,17 +208,28 @@
         </StackPanel>
         <Button Content="Create party" Canvas.Left="555" Canvas.Top="248" Click="createParty_Click" Height="30" Width="79" HorizontalAlignment="Left" VerticalAlignment="Top" Name="createParty"></Button>
         <Button Content="Delete char" Canvas.Left="404" Canvas.Top="248" HorizontalAlignment="Left" Height="30" VerticalAlignment="Center" Width="78" Name="deleteChar" Click="deleteChar_Click"></Button>
-        <ScrollViewer    Width="230" Height="200" Canvas.Left="404" Canvas.Top="33" BorderBrush="Azure" BorderThickness="4">
+        <ScrollViewer    Width="230" Height="200" Canvas.Left="404" Canvas.Top="33" BorderBrush="Azure" BorderThickness="4" 
+                         HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" Background="#FFA6D2F9">
             <ItemsControl ItemsSource="{Binding characterList}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <Border BorderBrush="Coral" BorderThickness="2" Margin="0,3,0,3">
+                            <Border BorderBrush="Coral" BorderThickness="2" Margin="0,3,0,3" MouseDown="Border_MouseDown">
                                 <Grid>
-                                    <Image Source="pack://application:,,,/Into the depths;component/Image/character frame.jpg" 
+                                    <Image Source="pack://application:,,,/DungeonCrawler;component/Image/character frame.jpg" 
                                            Height="50" HorizontalAlignment="Stretch" VerticalAlignment="Center" Stretch="Fill"></Image>
                                     <Image Source="{Binding IconPath}" Height="33" 
                                            Margin="38,0,0,5" HorizontalAlignment="Left" Stretch="Uniform"></Image>
+                                    <TextBlock Margin="70,0,0,3" Height="33" Width="200" HorizontalAlignment="Left">
+                                        <Run Text="{Binding CharacterName, StringFormat='Name: {0}'}"></Run>
+                                        <Run Text="{Binding ClassName, StringFormat='Class: {0}'}"></Run>
+                                        <LineBreak></LineBreak>
+                                        <Run Text="{Binding Strength, StringFormat='Str: {0}'}"></Run>
+                                        <Run Text="{Binding Agility, StringFormat='Agi: {0}'}"></Run>
+                                        <Run Text="{Binding Intellect, StringFormat='Int: {0}'}"></Run>
+                                        <Run Text="{Binding Spirit, StringFormat='Spi: {0}'}"></Run>
+                                        <Run Text="{Binding Stamina, StringFormat='Sta: {0}'}"></Run>
+                                    </TextBlock>
                                 </Grid>       
                             </Border>
                         </StackPanel>

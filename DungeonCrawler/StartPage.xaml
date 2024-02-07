@@ -1,0 +1,73 @@
+﻿<Page x:Class="DungeonCrawler.StartPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DungeonCrawler"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="StartPage">
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="1"/>
+                <GradientStop Color="#FFA6C1C3"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button Width="117" Height="42" Name="newGameButton" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74, 96, 0,0">
+            <Grid>
+                <Image Source="pack://application:,,,/DungeonCrawler;component/Image/buttonsky.png" Stretch="Fill"></Image>
+                <TextBlock Text="Create new game" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           FontWeight="Bold">
+                </TextBlock>
+            </Grid>
+        </Button>
+
+        <Button Width="117" Height="42" Name="loadGameButton" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74, 163, 0,0">
+            <Grid>
+                <Image Source="pack://application:,,,/DungeonCrawler;component/Image/buttongold.png" Stretch="Fill"></Image>
+                <TextBlock Text="Load game" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           FontWeight="Bold">
+                </TextBlock>
+            </Grid>
+        </Button>
+
+        <ScrollViewer Height="200" Width="505" Margin="206,96,89,154" Background="#FFE8EAD6">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Border BorderBrush="Khaki" BorderThickness="3" CornerRadius="3" 
+                        HorizontalAlignment="Stretch" Height="60" Margin="4">
+                    <TextBlock Name="save1" Margin="3,3,0,0">
+                        <Run Text="Name: Kalle"></Run>
+                        <Run Text="Class: Paladin"></Run>
+                    </TextBlock>
+                </Border>
+                <Border BorderBrush="Khaki" BorderThickness="3" CornerRadius="3" 
+                        HorizontalAlignment="Stretch" Height="60" Margin="4">
+                    <TextBlock Name="save2" Margin="3,3,0,0">
+                        <Run Text="Name: Kalle"></Run>
+                        <Run Text="Class: Paladin"></Run>
+                    </TextBlock>
+                </Border>
+                <Border BorderBrush="Khaki" BorderThickness="3" CornerRadius="3" 
+                        HorizontalAlignment="Stretch" Height="60" Margin="4">
+                    <TextBlock Name="save3" Margin="3,3,0,0">
+                        <Run Text="Name: Kalle"></Run>
+                        <Run Text="Class: Paladin"></Run>
+                    </TextBlock>
+                </Border>
+                <Border BorderBrush="Khaki" BorderThickness="3" CornerRadius="3" 
+                        HorizontalAlignment="Stretch" Height="60" Margin="4">
+                    <TextBlock Name="save4" Margin="3,3,0,0">
+                        <Run Text="Name: Kalle"></Run>
+                        <Run Text="Class: Paladin"></Run>
+                    </TextBlock>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

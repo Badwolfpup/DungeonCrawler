@@ -1,6 +1,6 @@
-﻿namespace DungeonCrawler.Classes
+﻿namespace DungeonCrawler.MonsterClasses
 {
-    public class Character
+    public class BaseMonster
     {
         public string CharacterName { get; set; }
         public int Strength { get; set; }
@@ -17,10 +17,12 @@
         public int CurrentMP { get; set; }
         public int XP { get; set; }
 
+        public int Level { get; set; }
+
         public int Armor { get; set; }
         public int MagicDefense { get; set; }
 
-        public Character(string charactername, int str, int agi, int inte, int spi, int sta, int hp, int mp, int xp, int armor, int magicdefense)
+        public BaseMonster(string charactername, int str, int agi, int inte, int spi, int sta, int hp, int mp, int xp, int armor, int magicdefense, int level)
         {
             CharacterName = charactername;
             Strength = str;
@@ -30,12 +32,13 @@
             Stamina = sta;
             MaxHP = hp;
             CurrentHP = hp;
-
             MaxMP = mp;
             CurrentMP = mp;
             XP = xp;
             Armor = armor;
             MagicDefense = magicdefense;
+            Level = level;
         }
+
     }
 }

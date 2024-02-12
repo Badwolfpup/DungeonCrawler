@@ -35,4 +35,8 @@
     <Resource Include="Image\Icon\warrior ikon.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Savefiles\" />
+  </ItemGroup>
+
 </Project>

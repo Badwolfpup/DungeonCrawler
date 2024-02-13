@@ -11,13 +11,17 @@ namespace DungeonCrawler.Rooms
 {
     public class Room : INotifyPropertyChanged
     {
+        //Implementering från INotifyPropertyChanged
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        #region Private Fields
         private ObservableCollection<BaseEvent> _eventList;
 
         private string _description;
+        #endregion
 
-        public ObservableCollection<BaseEvent> EventList
+        #region Public properties
+        public ObservableCollection<BaseEvent> EventList //Lista över events i ett room
         {
             get { return _eventList; }
             set
@@ -28,8 +32,8 @@ namespace DungeonCrawler.Rooms
                     OnPropertyChanged(nameof(EventList));
                 }
             }
-        }
-        public string Description
+        } 
+        public string Description //Beskrivning av room
         {
             get { return _description; }
             set
@@ -38,19 +42,19 @@ namespace DungeonCrawler.Rooms
                 OnPropertyChanged(nameof(Description));
             }
         }
-
+        #endregion
         public Room()
         {
             Description = RoomDescription();
             EventList = new ObservableCollection<BaseEvent>();
             AddEvent();
         }
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged(string propertyName) //Metoden skickar en signal till UI att propertyt man skickar med (propertyname) har uppdateras
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private string RoomDescription() 
+        private string RoomDescription() //Genererar slumpmässig bskrivning av ett Room
         {
             string[] environment = { "The walls are lined with moss", "On the floor you see a skeleton of an unfortunate adventurer", "In the center of the room there is a puddle of an unknown substance" };
 
@@ -60,7 +64,7 @@ namespace DungeonCrawler.Rooms
             return $"{environment[r.Next(environment.Length)]} \n{feeling[r.Next(feeling.Length)]}";
         }
 
-        private void AddEvent()
+        private void AddEvent() //Lägger till event till ett Room
         {
             Random r = new Random();
             int x = r.Next(10);

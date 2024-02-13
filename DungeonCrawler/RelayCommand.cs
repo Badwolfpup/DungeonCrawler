@@ -7,6 +7,7 @@ using System.Windows.Input;
 
 namespace DungeonCrawler
 {
+    //Klass som hanterar Commands som skickas i XAML. 
     public class RelayCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;

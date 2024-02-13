@@ -13,12 +13,15 @@ namespace DungeonCrawler
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        Frame frame;
+        #region private Fields
         private Rooms.Room _currentRoom;
         private Character _clickedcharacter;
 
         private ObservableCollection<Character> _characterlist;
 
+        #endregion
+
+        #region Public properties
         public ObservableCollection<Rooms.Room> RoomsList { get; set; }
         public ObservableCollection<Character> CharacterList
         {
@@ -58,6 +61,8 @@ namespace DungeonCrawler
                 }
             }
         }
+
+        #endregion
         public MainWindow()
         {
             InitializeComponent();
@@ -67,32 +72,29 @@ namespace DungeonCrawler
             CurrentRoom = RoomsList.Last();
         }
 
+        //Implementering från INotifyPropertyChanged
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged(string propertyName) //Metoden skickar en signal till UI att propertyt man skickar med (propertyname) har uppdateras
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void closeCharCreatePage()
-        {
-            Content = null;
-        }
 
-        private void StartPagePage()
+        private void StartPagePage() //Skapar en instans av StartPage och sätter content i MainWindow till StartPage
         {
             StartPage s = new StartPage(this);
             Content = s;
         }
 
-        public void CharacterCreationPage()
+        public void CharacterCreationPage() //Skapar en instans av CharacterCreation och sätter content i MainWindow till CharacterCreation
         {
             Content = null;
             CharacterCreation c = new CharacterCreation(this);
             Content = c;
         }
 
-        public void ClosePage(ObservableCollection<Character> c)
+        public void ClosePage(ObservableCollection<Character> c) //Stänger den aktiva Page och laddar CharacterList med den skapade/laddade partyt
         {
             CharacterList = c;
             ClickedCharacter = CharacterList.First();
@@ -100,9 +102,13 @@ namespace DungeonCrawler
 
         }
 
-        private void Border_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Border_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) //Sätter vilken 
         {
+            //I object sender får man med det UI-element som man interagerat med.
+            //För att man ska kunna tilldela det till ett typ av objekt måste man casta det, här genom sender as Border
             Border border = sender as Border;
+
+            //Sparar ner datan från den Border vi har klickat på. UI hämtar data från ClickedCharacter
             ClickedCharacter = border.DataContext as Character;
         }
     }

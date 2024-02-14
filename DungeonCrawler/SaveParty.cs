@@ -25,6 +25,7 @@ namespace DungeonCrawler
         public static void SaveToFile(ObservableCollection<Character> party) //Sparar ner klasserna i en json-fil. Saknar logik för att hantera när man raderat filer
         {
             //Kolla hur många filer som finns i foldern
+            if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
             int numberSaves = Directory.GetFiles(folderPath).Length;
 
             //Skapar en full filgenväg, inklusive filnamn och filändelse

@@ -111,5 +111,14 @@ namespace DungeonCrawler
             //Sparar ner datan från den Border vi har klickat på. UI hämtar data från ClickedCharacter
             ClickedCharacter = border.DataContext as Character;
         }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Up)
+            {
+                RoomsList.Add(new Rooms.Room());
+                CurrentRoom = RoomsList.Last();
+            }
+        }
     }
 }

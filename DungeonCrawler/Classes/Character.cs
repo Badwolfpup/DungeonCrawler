@@ -1,5 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using DungeonCrawler.Items;
+using DungeonCrawler.Items.Equipment;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace DungeonCrawler.Classes
 {
@@ -20,6 +23,7 @@ namespace DungeonCrawler.Classes
         private int _level;
         private int _armor;
         private int _magicdefense;
+        private ObservableCollection<BaseEquipment> _equipment;
         #endregion
 
         #region public properties
@@ -196,6 +200,18 @@ namespace DungeonCrawler.Classes
             }
         }
 
+        public ObservableCollection<BaseEquipment> Equipment
+        {
+            get { return _equipment; }
+            set
+            {
+                if (_equipment != value)
+                {
+                    _equipment = value;
+                    OnPropertyChanged(nameof(Equipment));
+                }
+            }
+        }
         #endregion
 
         public string SaveID { get; set; }
@@ -218,6 +234,7 @@ namespace DungeonCrawler.Classes
             MagicDefense = magicdefense;
             Level = 1;
             SaveID = saveID;
+            StartingEquipment();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -226,5 +243,85 @@ namespace DungeonCrawler.Classes
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private void StartingEquipment()
+        {
+            Equipment = new ObservableCollection<BaseEquipment>()
+            {
+                new Head("Basic head", 2, 2, 2, 2, 2, 2, 2),
+                new Neck("Basic neck", 2, 2, 2, 2, 2, 2, 2),
+                new Chest("Basic Chest", 2, 2, 2, 2, 2, 2, 2),
+                new Shoulder("Basic shoulder", 2, 2, 2, 2, 2, 2, 2),
+                new Arm("Basic arm", 2, 2, 2, 2, 2, 2, 2),
+                new Hand("Basic hand", 2, 2, 2, 2, 2, 2, 2),
+                new Legs("Basic legs", 2, 2, 2, 2, 2, 2, 2),
+                new Feet("Basic feet", 2, 2, 2, 2, 2, 2, 2),
+                new MainHand ("Basic Main hand", 2, 2, 2, 2, 2, 2, 2),
+                new OffHand("Basic off-hand", 2, 2, 2, 2, 2, 2, 2)
+            };
+            
+        }
+
+        private void AddStatsFromStartingEquipment()
+        {
+            PropertyInfo p;
+            foreach (var item in Equipment)
+            {
+                //Strength += item.Strength;
+                p = item.GetType().GetProperty("Strength");
+                Strength += (int)p.GetValue(item);
+
+                p = item.GetType().GetProperty("Agility");
+                Agility += (int)p.GetValue(item);
+
+                p = item.GetType().GetProperty("Intellect");
+                Intellect += (int)p.GetValue(item);
+
+                p = item.GetType().GetProperty("Spirit");
+                Spirit += (int)p.GetValue(item);
+
+                p = item.GetType().GetProperty("Stamina");
+                Stamina += (int)p.GetValue(item);
+
+                p = item.GetType().GetProperty("Armor");
+                Armor += (int)p.GetValue(item);
+
+                p = item.GetType().GetProperty("MagicDefense");
+                MagicDefense += (int)p.GetValue(item);
+            }
+        }
+
+        private void ChangeEquipment(BaseItem newItem)
+        {
+            foreach(var oldItem in Equipment)
+            {
+                if ( newItem.GetType().Equals(oldItem.GetType()) )
+                {
+                    PropertyInfo[] pNewItem = newItem.GetType().GetProperties();
+                    PropertyInfo[] pOldItem = oldItem.GetType().GetProperties();
+                    PropertyInfo[] pClass = typeof(Character).GetProperties();
+
+                    foreach (var newProperty in pNewItem)
+                    {
+                        foreach (var oldProperty in pOldItem)
+                        {
+                            if (newProperty.Name.Equals(oldProperty.Name))
+                            {
+                                foreach (var classProperty in pClass)
+                                {
+                                    if (classProperty.Name.Equals(oldProperty.Name))
+                                    {
+                                        int newValue = (int)classProperty.GetValue(this, null) 
+                                            + (int)newProperty.GetValue(newItem, null) + (int)oldProperty.GetValue(oldItem, null);
+                                        classProperty.SetValue(this, newValue, null);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }

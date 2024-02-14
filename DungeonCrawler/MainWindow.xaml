@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DungeonCrawler"
         mc:Ignorable="d"
-        Title="MainWindow" Height="536" Width="950">
+        Title="MainWindow" Height="536" Width="950" KeyDown="Window_KeyDown">
     <Grid x:Name="MainGrid" ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25*"></ColumnDefinition>

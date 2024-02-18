@@ -120,7 +120,7 @@ namespace DungeonCrawler.Classes
                 if (_currenthp != value)
                 {
                     _currenthp = value;
-                    OnPropertyChanged(nameof(_currenthp));
+                    OnPropertyChanged(nameof(CurrentHP));
                 }
             }
         }
@@ -293,9 +293,10 @@ namespace DungeonCrawler.Classes
 
         private void ChangeEquipment(BaseItem newItem)
         {
+
             foreach(var oldItem in Equipment)
             {
-                if ( newItem.GetType().Equals(oldItem.GetType()) )
+                if (newItem.GetType().Equals(oldItem.GetType()))
                 {
                     PropertyInfo[] pNewItem = newItem.GetType().GetProperties();
                     PropertyInfo[] pOldItem = oldItem.GetType().GetProperties();
@@ -307,15 +308,11 @@ namespace DungeonCrawler.Classes
                         {
                             if (newProperty.Name.Equals(oldProperty.Name))
                             {
-                                foreach (var classProperty in pClass)
-                                {
-                                    if (classProperty.Name.Equals(oldProperty.Name))
-                                    {
-                                        int newValue = (int)classProperty.GetValue(this, null) 
-                                            + (int)newProperty.GetValue(newItem, null) + (int)oldProperty.GetValue(oldItem, null);
-                                        classProperty.SetValue(this, newValue, null);
-                                    }
-                                }
+                                PropertyInfo p = this.GetType().GetProperty(oldProperty.Name);
+                                int newValue = (int)p.GetValue(this, null) 
+                                    + (int)newProperty.GetValue(newItem, null) - (int)oldProperty.GetValue(oldItem, null);
+                                p.SetValue(this, newValue, null);
+
                             }
                         }
                     }

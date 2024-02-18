@@ -23,10 +23,14 @@ namespace DungeonCrawler.Classes
         private int _level;
         private int _armor;
         private int _magicdefense;
+
+
         private ObservableCollection<BaseEquipment> _equipment;
         #endregion
 
         #region public properties
+
+
         public string CharacterName
         {
             get { return _charactername; }

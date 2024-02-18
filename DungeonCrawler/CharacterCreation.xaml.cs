@@ -166,7 +166,7 @@ namespace DungeonCrawler
 
                 //Type kan vara vilken klass som helst. Används när man dynamiskt vill manipulera en klass. This i This.GetType() säger att det är klassen man befinner sig i.
                 Type type = this.GetType();
-                
+
                 //PropertyInfo kan vara vilket property som helst. Användsa när man vill ändra eller läsa ett property utan att veta namnet på det.
                 //Vi anger vilket property genom GetProperty("namnet på property som en string")
                 PropertyInfo p = type.GetProperty(stat); 
